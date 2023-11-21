@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 const JWT = require("jsonwebtoken");
 // const User = require("../models/User.model");
 const user = require("../Model/User")
@@ -77,6 +79,7 @@ const resetPassword = async (userId, token, password) => {
     throw error;
   }
 };
+<<<<<<< HEAD
 
 const SignUp = async (res,req)=>{
   const {username, email, password} = req.body
@@ -114,3 +117,6 @@ const SignUp = async (res,req)=>{
 module.exports = {
  SignUp
 }
+=======
+>>>>>>> d117a80411a6f7f14368bd99f76babec2dcba4ca
+>>>>>>> 87b6be2f62aa7d092c6cd506f1412e215726e250
