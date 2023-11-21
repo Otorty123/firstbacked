@@ -33,6 +33,8 @@ const userSchema = new Schema({
 
 userSchema.plugin(passportLocalMongoose)
 
+const Usermodel = model("User", userSchema) ;
+
 passport.use(Usermodel.createStrategy())
 
 passport.serializeUser(Usermodel.serializeUser())
