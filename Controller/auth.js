@@ -1,12 +1,3 @@
-
-const isLogin = async(req, res, next)=>{
-    if(req.is) return next()
-    return res.json({})
-}
-
-is
-let mongoose;
-
 const JWT = require("jsonwebtoken");
 const User = require("../models/User.model");
 const Token = require("../models/Token.model");
