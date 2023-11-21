@@ -5,3 +5,5 @@ const isLogin = async(req, res, next)=>{
 }
 
 is
+let mongoose;
+
