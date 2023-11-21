@@ -4,9 +4,12 @@ const Token = require("../models/Token.model");
 const sendEmail = require("../utils/email/sendEmail");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
+const axios = require('axios')
+
+SECRET_KEY = process.env.SECRET_KEY
 
 const bcryptSalt =("bcryptSalt") ;
-const clientURL = ;
+// const clientURL = ;
 
 const requestPasswordReset = async (email) => {
   try {
@@ -73,3 +76,5 @@ const resetPassword = async (userId, token, password) => {
     throw error;
   }
 };
+const verifyPayment = async
+
