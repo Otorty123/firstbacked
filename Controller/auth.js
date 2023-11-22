@@ -1,7 +1,7 @@
 const JWT = require("jsonwebtoken");
 // const sendEmail = require("../utils/email/sendEmail");
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
+const nodemailler = require("nodemailer");
 const passport = require("passport");
 const Usermodel = require('../Model/User');
 

@@ -27,6 +27,10 @@ const userSchema = new Schema({
         type:String,
         enum:["free","basic","premium"],
         default:"free"
+    },
+    wallet:{
+        type:mongoose.Schema.ObjectId,
+        ref:"Wallet"
     }
 
 })
