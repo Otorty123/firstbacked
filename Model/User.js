@@ -27,11 +27,17 @@ const userSchema = new Schema({
         type:String,
         enum:["free","basic","premium"],
         default:"free"
+    },
+    wallet:{
+        type:mongoose.Schema.ObjectId,
+        ref:"Wallet"
     }
 
 })
 
 userSchema.plugin(passportLocalMongoose)
+
+const Usermodel = model("User", userSchema) ;
 
 passport.use(Usermodel.createStrategy())
 

@@ -30,11 +30,15 @@ const TransactionSchema = new Schema({
         type: Number,
         required: [true, "transaction amount not indicated"]
     },
+    description: {
+        type: String,
+        required: [true, "no description"]
+    },
     deposit: {
         type: String,
         required: true
     },
-    reference_num: {
+    reference: {
         type: String,
         trim: true,
         required: [true, "transaction not referenced"],

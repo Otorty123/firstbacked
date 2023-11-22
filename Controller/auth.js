@@ -1,12 +1,12 @@
 const JWT = require("jsonwebtoken");
-const User = require("../models/User.model");
-const Token = require("../models/Token.model");
-const sendEmail = require("../utils/email/sendEmail");
-const crypto = require("crypto");
+const user = require("../Model/User")
+// const sendEmail = require("../utils/email/sendEmail");
 const bcrypt = require("bcrypt");
-const axios = require('axios')
+const nodemailer = require("nodemailer");
+const passport = require("passport");
 
-SECRET_KEY = process.env.SECRET_KEY
+
+
 
 const bcryptSalt =("bcryptSalt") ;
 // const clientURL = ;
@@ -76,5 +76,52 @@ const resetPassword = async (userId, token, password) => {
     throw error;
   }
 };
-const verifyPayment = async
 
+const SignUp = async (res,req)=>{
+  const {username, email, password} = req.body
+  if(!username){
+    return res.json({error: "username is required"})
+  }
+  if(!email){
+    return res.json({error:"email is required"})
+  }
+  if(!password){
+    return res.json({error:"password is required"})
+  }
+  const existingUser = await Usermodel.findOne({email});
+  if(existingUser){
+    return res.json({error:"user already exist"})
+  }
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password,salt);
+  const newUser = new Usermodel({
+    email:email,
+    username:username,
+    password:hashedPassword
+  })
+  Usermodel.register(newUser, password, function(err){
+    if(err){
+      console.log(err);
+    }
+    passport.authenticate("local")(req,res, function(err){
+      res.json({msg:"Signed In Successfully"})
+    })
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = {
+ SignUp
+}

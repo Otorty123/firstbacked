@@ -4,7 +4,7 @@ const connectDb = require('./ConnectDb/connect')
 const session = require('express-session')
 const mongoose = require('mongoose')
 const passport = require('passport')
-const route = require('./Router/handler')
+const router = require('./Router/handler')
 
 port = process.env.port || 5000
 
@@ -24,7 +24,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/api/v1', route)
+app.use('/api/v1', router)
 
 
 
