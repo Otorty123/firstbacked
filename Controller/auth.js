@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-=======
 const JWT = require("jsonwebtoken");
-// const User = require("../models/User.model");
-const user = require("../Model/User")
-// const Token = require("../models/Token.model");
 // const sendEmail = require("../utils/email/sendEmail");
-const crypto = require("crypto");
 const bcrypt = require("bcrypt");
-const nodemaier = require("nodemailer");
+const nodemailer = require("nodemailer");
 const passport = require("passport");
-const { modelNames } = require("mongoose");
+const Usermodel = require('../Model/User');
 
 const bcryptSalt =("bcryptSalt") ;
 // const clientURL = ;
@@ -79,10 +73,11 @@ const resetPassword = async (userId, token, password) => {
     throw error;
   }
 };
-<<<<<<< HEAD
 
-const SignUp = async (res,req)=>{
-  const {username, email, password} = req.body
+const SignUp = async (req,res)=>{
+  const {username, email, password} = req.body;
+
+
   if(!username){
     return res.json({error: "username is required"})
   }
@@ -92,7 +87,7 @@ const SignUp = async (res,req)=>{
   if(!password){
     return res.json({error:"password is required"})
   }
-  const existingUser = await Usermodel.findOne({email});
+  const existingUser = await Usermodel.findOne({email})
   if(existingUser){
     return res.json({error:"user already exist"})
   }
@@ -108,15 +103,63 @@ const SignUp = async (res,req)=>{
       console.log(err);
     }
     passport.authenticate("local")(req,res, function(err){
-      res.json({msg:"Signed In Successfully"})
+      res.json({msg:"Sign Up Successfully"})
     })
+
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: process.env.my_email,
+        pass: process.env.my_password,
+      },
+  });
+  const mailOptions = {
+    from: "toshconsultacademy@gmail.com",
+    to: email,
+    subject: 'Welcome to Our App',
+    text: 'Hello! Welcome to our application. We hope you enjoy your experience!',
+  };
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+        console.error(error);
+    } 
+  });
+})
+}
+
+const Login = async (req,res)=>{
+  const{username, password} = req.body;
+  if(!username){
+      res.json({error: "username is required"})
+  }
+  if(!password){
+      res.json({error: "password is required"})
+  }
+  const existingUser = await Usermodel.findOne({username})
+  if(!existingUser){
+      return res.json({error: "user not found, please signup to continue"})
+  }
+  const passwordMatch = await bcrypt.compare(password, existingUser.password)
+  if(!passwordMatch){
+      return res.json({error: "password is incorrect"})
+  }
+
+  const User = new Usermodel({
+      username,
+      password
+  })
+
+  req.login(User, function(err){
+      if(err){
+          return res.json(err)
+      }
+      passport.authenticate("local")(req,res, function(){
+          res.json({msg: "logged in successfully"})
+      })
   })
 }
 
-
 module.exports = {
- SignUp
+ SignUp,
+ Login
 }
-=======
->>>>>>> d117a80411a6f7f14368bd99f76babec2dcba4ca
->>>>>>> 87b6be2f62aa7d092c6cd506f1412e215726e250

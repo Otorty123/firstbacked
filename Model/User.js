@@ -41,4 +41,4 @@ passport.serializeUser(Usermodel.serializeUser())
 
 passport.deserializeUser(Usermodel.deserializeUser())
 
-module.express = Usermodel
+module.exports = Usermodel;
