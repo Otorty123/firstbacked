@@ -5,8 +5,10 @@ const session = require('express-session')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const route = require('./Router/handler')
+const nodemailer = require('nodemailer')
+const controller = require('./Controller/controller')
 
-port = process.env.port || 5000
+port = process.env.Port || 5000
 
 // Middleware
 const app = express()
@@ -25,6 +27,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/api/v1', route)
+
 
 
 
