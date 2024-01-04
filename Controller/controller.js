@@ -16,7 +16,7 @@ const sendmail = async (req, res)=>{
             from : process.env.email,
             to: "winohisreal@gmail.com",
             subject: subject || 'contact form submission',
-            text:`Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+            text:`Name: ${name}\nEmail: ${email}\nMessage: ${message} how are you doing`,
         };
         await transport.sendMail(mailOption);
         res.json({msg:'Contact form submitted successfully'})
@@ -27,5 +27,5 @@ const sendmail = async (req, res)=>{
     }
 }
 module.exports = {
-    sendmail,
+    sendmail
 }

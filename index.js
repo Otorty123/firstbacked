@@ -8,6 +8,9 @@ const route = require('./Router/handler')
 const nodemailer = require('nodemailer')
 const controller = require('./Controller/controller')
 
+const router = require('./Router/handler')
+// d5dcdd1af1ab965e963a730ae4efdaa1cac68b15
+
 port = process.env.Port || 5000
 
 // Middleware
@@ -26,7 +29,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/api/v1', route)
+app.use('/api/v1', router)
 
 
 
